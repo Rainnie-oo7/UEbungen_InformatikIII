@@ -1,0 +1,24 @@
+def block_variance(image, block_size):
+    height, width = image.shape[:2]
+    result = np.zeros((height//block_size, width//block_size))
+    var = 0
+    tmp = 0
+    a = 0
+    m = 0
+    intensitaetarray = []
+
+    for i in range(0, height, block_size):
+        for j in range(0, width, block_size):
+            block = image[i:i+block_size, j:j+block_size]
+            variance_intensity = np.var(block)
+            result[i//block_size, j//block_size] = variance_intensity
+
+    def compute_var(intensitaetarray, m, n):
+
+        for i in intensitaetarray:
+            tmp += ((i - m) ** (i - m))
+            print(tmp)
+            var = 1 / n ** tmp
+        print('The variance s² of original image is: ', var)
+
+    return result
